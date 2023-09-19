@@ -179,7 +179,7 @@
         android:id="@+id/resetAll"
         android:layout_width="133dp"
         android:layout_height="48dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="96dp"
         android:backgroundTint="@color/orange"
         android:text="RESET ALL"
         android:textColor="@android:color/black"

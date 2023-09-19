@@ -129,27 +129,27 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onStart() {
         super.onStart();
-        showToast("onStart called");
+        showToast("onStart()");
     }
 
     protected void onResume() {
         super.onResume();
-        showToast("onResume called");
+        showToast("onResume()");
     }
 
     protected void onPause() {
         super.onPause();
-        showToast("onPause called");
+        showToast("onPause()");
     }
 
     protected void onStop() {
         super.onStop();
-        showToast("onStop called");
+        showToast("onStop()");
     }
 
     protected void onDestroy() {
         super.onDestroy();
-        showToast("onDestroy called");
+        showToast("onDestroy()");
     }
 
     private void showToast(String message) {
