@@ -103,4 +103,57 @@ public class MainActivity extends AppCompatActivity {
 
         counterTextView0.setText(String.valueOf(counterAll));
     }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt("counterAll", counterAll);
+        outState.putInt("counter1", counter1);
+        outState.putInt("counter2", counter2);
+        outState.putInt("counter3", counter3);
+        outState.putInt("counter4", counter4);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        counterAll = savedInstanceState.getInt("counterAll");
+        counter1 = savedInstanceState.getInt("counter1");
+        counter2 = savedInstanceState.getInt("counter2");
+        counter3 = savedInstanceState.getInt("counter3");
+        counter4 = savedInstanceState.getInt("counter4");
+        update();
+    }
+
+    protected void onStart() {
+        super.onStart();
+        showToast("onStart()");
+    }
+
+    protected void onResume() {
+        super.onResume();
+        showToast("onResume()");
+    }
+
+    protected void onPause() {
+        super.onPause();
+        showToast("onPause()");
+    }
+
+    protected void onStop() {
+        super.onStop();
+        showToast("onStop()");
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        showToast("onDestroy()");
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
 }

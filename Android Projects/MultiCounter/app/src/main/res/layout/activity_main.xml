@@ -13,11 +13,11 @@
         android:backgroundTint="@color/yellow"
         android:text="RESET"
         android:textColor="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/reset2"
+        app:layout_constraintBottom_toBottomOf="@+id/sum1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/sum1"
-        app:layout_constraintTop_toBottomOf="@+id/resetAll"
+        app:layout_constraintTop_toTopOf="@+id/sum1"
         app:layout_constraintVertical_bias="0.5" />
 
     <Button
@@ -27,11 +27,11 @@
         android:backgroundTint="@color/yellow"
         android:text="RESET"
         android:textColor="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/reset3"
+        app:layout_constraintBottom_toBottomOf="@+id/sum2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/sum2"
-        app:layout_constraintTop_toBottomOf="@+id/reset1"
+        app:layout_constraintTop_toTopOf="@+id/sum2"
         app:layout_constraintVertical_bias="0.5" />
 
     <Button
@@ -41,11 +41,11 @@
         android:backgroundTint="@color/yellow"
         android:text="RESET"
         android:textColor="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/reset4"
+        app:layout_constraintBottom_toBottomOf="@+id/sum3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/sum3"
-        app:layout_constraintTop_toBottomOf="@+id/reset2"
+        app:layout_constraintTop_toTopOf="@+id/sum3"
         app:layout_constraintVertical_bias="0.5" />
 
     <Button
@@ -68,11 +68,11 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/green"
         android:text="+1"
-        app:layout_constraintBottom_toTopOf="@+id/sum2"
+        app:layout_constraintBottom_toBottomOf="@+id/counter1"
         app:layout_constraintEnd_toStartOf="@+id/reset1"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/counter1"
-        app:layout_constraintTop_toBottomOf="@+id/resetAll"
+        app:layout_constraintTop_toTopOf="@+id/counter1"
         app:layout_constraintVertical_bias="0.5" />
 
     <Button
@@ -81,11 +81,11 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/green"
         android:text="+1"
-        app:layout_constraintBottom_toTopOf="@+id/sum3"
+        app:layout_constraintBottom_toBottomOf="@+id/counter2"
         app:layout_constraintEnd_toStartOf="@+id/reset2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/counter2"
-        app:layout_constraintTop_toBottomOf="@+id/sum1"
+        app:layout_constraintTop_toTopOf="@+id/counter2"
         app:layout_constraintVertical_bias="0.5" />
 
 
@@ -95,11 +95,11 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/green"
         android:text="+1"
-        app:layout_constraintBottom_toTopOf="@+id/sum4"
+        app:layout_constraintBottom_toBottomOf="@+id/counter3"
         app:layout_constraintEnd_toStartOf="@+id/reset3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/counter3"
-        app:layout_constraintTop_toBottomOf="@+id/sum2"
+        app:layout_constraintTop_toTopOf="@+id/counter3"
         app:layout_constraintVertical_bias="0.5" />
 
     <Button
@@ -108,11 +108,11 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/green"
         android:text="+1"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/reset4"
         app:layout_constraintEnd_toStartOf="@+id/reset4"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/counter4"
-        app:layout_constraintTop_toBottomOf="@+id/sum3"
+        app:layout_constraintTop_toTopOf="@+id/reset4"
         app:layout_constraintVertical_bias="0.5" />
 
     <TextView
@@ -156,11 +156,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/sum4"
         app:layout_constraintEnd_toStartOf="@+id/sum4"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/counter3"
+        app:layout_constraintTop_toTopOf="@+id/sum4"
         app:layout_constraintVertical_bias="0.5" />
 
     <TextView
@@ -168,11 +168,11 @@
         android:layout_width="16dp"
         android:layout_height="23dp"
         android:text="0"
-        app:layout_constraintBottom_toTopOf="@+id/counter1"
+        app:layout_constraintBottom_toBottomOf="@+id/resetAll"
         app:layout_constraintEnd_toStartOf="@+id/resetAll"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/resetAll"
         app:layout_constraintVertical_bias="0.5" />
 
     <Button
