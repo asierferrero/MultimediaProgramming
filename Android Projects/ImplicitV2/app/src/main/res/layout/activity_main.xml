@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter URL"
+        android:text="https://uni.eus"/>
+
+    <Button
+        android:id="@+id/urlButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/url"
+        android:layout_marginTop="1dp"
+        android:text="Open URL"
+        android:onClick="urlButton" />
+
+    <EditText
+        android:id="@+id/location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/urlButton"
+        android:hint="Enter Location"
+        android:text="Eibar"/>
+
+    <Button
+        android:id="@+id/mapsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/location"
+        android:layout_marginTop="2dp"
+        android:text="Open Maps"
+        android:onClick="mapsButton"/>
+
+    <EditText
+        android:id="@+id/share"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mapsButton"
+        android:hint="Enter Text"
+        android:text="Kaixo"/>
+
+    <Button
+        android:id="@+id/shareButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/share"
+        android:layout_marginTop="0dp"
+        android:text="Share Text"
+        android:onClick="shareButton"/>
+</RelativeLayout>
