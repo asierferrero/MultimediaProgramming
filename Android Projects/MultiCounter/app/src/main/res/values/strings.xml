@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MultiCounter</string>
+    <string name="reset_all">RESET ALL</string>
+    <string name="reset">RESET</string>
+    <string name="reset2">RESET</string>
+    <string name="reset3">RESET</string>
+    <string name="reset4">RESET</string>
 </resources>

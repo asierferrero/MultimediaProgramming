@@ -1,18 +1,26 @@
 package eus.asier.implicit;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-import android.widget.EditText;
 import android.content.Intent;
-import android.net.Uri;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.net.Uri;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private EditText url;
     private EditText location;
     private EditText share;
+    private ImageView photo;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private ActivityResultLauncher<Intent> someActivityResultLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +30,24 @@ public class MainActivity extends AppCompatActivity {
         url = findViewById(R.id.url);
         location = findViewById(R.id.location);
         share = findViewById(R.id.share);
+        photo = findViewById(R.id.photo);
+
+        // Initialize the ActivityResultLauncher
+        someActivityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK) {
+                        // Handle the result here
+                        Intent data = result.getData();
+                        if (data != null) {
+                            Bundle extras = data.getExtras();
+                            if (extras != null) {
+                                Bitmap imageBitmap = (Bitmap) extras.get("data");
+                                photo.setImageBitmap(imageBitmap);
+                            }
+                        }
+                    }
+                });
     }
 
     public void urlButton(View view) {
@@ -52,6 +78,14 @@ public class MainActivity extends AppCompatActivity {
 
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
+        }
+    }
+
+    public void photoButton(View view) {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            someActivityResultLauncher.launch(takePictureIntent);
         }
     }
 }
