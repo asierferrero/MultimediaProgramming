@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">OnBoarding</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello</string>
+    <string name="next">Next</string>
+    <string name="uni">Discover Uni Eibar-Ermua!</string>
+    <string name="skip">Skip</string>
+    <string name="finish">Finish</string>
+    <string name="ikasleak">MAD2\'s students are the best ones</string>
+    <string name="azkena">This is the last screen.</string>
+</resources>

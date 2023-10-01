@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OnBoarding</string>
+    <string name="hello_blank_fragment">Hola</string>
+    <string name="next">Siguiente</string>
+    <string name="uni">Descubre Uni Eibar-Ermua!</string>
+    <string name="skip">Omitir</string>
+    <string name="finish">Terminar</string>
+    <string name="ikasleak">Los alumnos de DAM2 son los mejores</string>
+    <string name="azkena">Este es el último fragmento</string>
+</resources>
