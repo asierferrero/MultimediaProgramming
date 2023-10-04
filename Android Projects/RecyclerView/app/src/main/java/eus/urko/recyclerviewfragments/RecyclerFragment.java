@@ -1,4 +1,4 @@
-package eus.urko.recyclerviewfragments;
+package eus.asier.masterdetail;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,7 +26,6 @@ public class RecyclerFragment extends Fragment {
     private FragmentRecyclerBinding binding;
     private ElementsViewModel elementsViewModel;
     private NavController navController;
-    private ElementsAdapter elementsAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,7 +33,6 @@ public class RecyclerFragment extends Fragment {
         // Inflate the layout for this fragment
         return (binding = FragmentRecyclerBinding.inflate(inflater, container, false)).getRoot();
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -49,52 +47,45 @@ public class RecyclerFragment extends Fragment {
             }
         });
 
-        elementsAdapter = new ElementsAdapter();
-        binding.listaRecyclerView.setAdapter(elementsAdapter);
+        ElementsAdapter elementsAdapter = new ElementsAdapter();
+        binding.recyclerView.setAdapter(elementsAdapter);
 
-        binding.listaRecyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
+        binding.recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
-                ItemTouchHelper.UP | ItemTouchHelper.DOWN,
-                ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
-
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                return true;
-            }
-
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                int position = viewHolder.getAdapterPosition();
-                Element element = elementsAdapter.getElement(position);
-                elementsViewModel.delete(element);
-            }
-        }).attachToRecyclerView(binding.listaRecyclerView);
-
-        elementsViewModel.getElements().observe(getViewLifecycleOwner(), new Observer<List<Element>>() {
+        elementsViewModel.get().observe(getViewLifecycleOwner(), new Observer<List<Element>>() {
             @Override
             public void onChanged(List<Element> elements) {
-                elementsAdapter.setElements(elements);
+                elementsAdapter.establishList(elements);
             }
         });
     }
 
     class ElementsAdapter extends RecyclerView.Adapter<ElementViewHolder> {
-        private List<Element> elements;
+
+        List<Element> elements;
 
         @NonNull
         @Override
         public ElementViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new ElementViewHolder(ViewholderElementBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+            return new ElementViewHolder(ViewholderElementBinding.inflate(getLayoutInflater(), parent, false));
         }
 
         @Override
         public void onBindViewHolder(@NonNull ElementViewHolder holder, int position) {
+
             Element element = elements.get(position);
 
-            holder.binding.name.setText(element.getName());
-            holder.binding.ratingBar.setRating(element.getRating());
-            holder.binding.imageView.setImageResource(element.getImage());
+            holder.binding.name.setText(element.name);
+            holder.binding.ratingBar.setRating(element.rating);
+            holder.binding.imageView.setImageResource(element.image);
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    elementsViewModel.select(element);
+                    navController.navigate(R.id.action_recyclerFragment_to_detailFragment);
+                }
+            });
         }
 
         @Override
@@ -102,17 +93,13 @@ public class RecyclerFragment extends Fragment {
             return elements != null ? elements.size() : 0;
         }
 
-        public void setElements(List<Element> elements) {
+        public void establishList(List<Element> elements){
             this.elements = elements;
             notifyDataSetChanged();
         }
-
-        public Element getElement(int position) {
-            return elements.get(position);
-        }
     }
 
-    class ElementViewHolder extends RecyclerView.ViewHolder {
+    static class ElementViewHolder extends RecyclerView.ViewHolder {
         private final ViewholderElementBinding binding;
 
         public ElementViewHolder(ViewholderElementBinding binding) {

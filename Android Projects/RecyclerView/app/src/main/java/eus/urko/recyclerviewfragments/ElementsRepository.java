@@ -1,4 +1,4 @@
-package eus.urko.recyclerviewfragments;
+package eus.asier.masterdetail;
 
 import java.util.ArrayList;
 import java.util.List;
