@@ -19,10 +19,8 @@ public class ElementsViewModel extends AndroidViewModel {
         super(application);
 
         elementsRepository = new ElementsRepository();
-
         listElementsMutableLiveData.setValue(elementsRepository.get());
     }
-
 
     MutableLiveData<List<Element>> get(){
         return listElementsMutableLiveData;
