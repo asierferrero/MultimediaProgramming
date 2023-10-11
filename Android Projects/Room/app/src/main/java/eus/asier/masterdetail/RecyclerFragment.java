@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -23,7 +24,7 @@ import eus.asier.masterdetail.databinding.ViewholderElementBinding;
 public class RecyclerFragment extends Fragment {
 
     private FragmentRecyclerBinding binding;
-    private ElementsViewModel elementsViewModel;
+    public ElementsViewModel elementsViewModel;
     private NavController navController;
 
     @Override
@@ -47,8 +48,20 @@ public class RecyclerFragment extends Fragment {
 
         elementsViewModel.obtain().observe(getViewLifecycleOwner(), elements -> {
             elementsAdapter.establishList(elements);
+
+            getElements().observe(getViewLifecycleOwner(), new Observer<List<Element>>() {
+                @Override
+                public void onChanged(List<Element> elements) {
+                    elementsAdapter.establishList(elements);
+                }
+
+            });
         });
     }
+    LiveData<List<Element>> getElements() {
+        return elementsViewModel.obtain();
+    }
+
 
     class ElementsAdapter extends RecyclerView.Adapter<ElementViewHolder> {
         private List<Element> elements;
@@ -70,7 +83,6 @@ public class RecyclerFragment extends Fragment {
 
             holder.itemView.setOnClickListener(v -> {
                 elementsViewModel.select(element);
-                navController.navigate(R.id.action_recyclerFragment_to_detailFragment);
                 //Delete
                 navController.navigate(R.id.action_recyclerFragment_to_newElementFragment);
                 //Add

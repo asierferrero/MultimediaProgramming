@@ -16,10 +16,9 @@ import android.view.ViewGroup;
 import eus.asier.masterdetail.databinding.FragmentNewElementBinding;
 
 public class NewElementFragment extends Fragment {
-
     private FragmentNewElementBinding binding;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return (binding = FragmentNewElementBinding.inflate(inflater, container, false)).getRoot();
@@ -29,7 +28,7 @@ public class NewElementFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ElementsViewModel elementosViewModel = new ViewModelProvider(requireActivity()).get(ElementsViewModel.class);
+        ElementsViewModel elementsViewModel = new ViewModelProvider(requireActivity()).get(ElementsViewModel.class);
         NavController navController = Navigation.findNavController(view);
 
         binding.newElementBtn.setOnClickListener(new View.OnClickListener() {
@@ -38,7 +37,7 @@ public class NewElementFragment extends Fragment {
                 String name = binding.name.getText().toString();
                 String description = binding.description.getText().toString();
 
-//                elementosViewModel.add(new Element(R.drawable.stoichkov, name, description));
+                elementsViewModel.insert(new Element(R.drawable.stoichkov, name, description));
 
                 navController.popBackStack();
             }

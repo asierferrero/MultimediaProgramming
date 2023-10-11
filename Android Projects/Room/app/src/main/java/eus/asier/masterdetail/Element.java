@@ -9,7 +9,6 @@ public class Element {
     int id;
     String name;
     String description;
-    String mark;
     int image;
     float rating;
 

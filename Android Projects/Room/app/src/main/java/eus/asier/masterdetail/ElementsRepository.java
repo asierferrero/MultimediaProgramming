@@ -20,6 +20,14 @@ public class ElementsRepository {
         return elementsDAO.getElements();
     }
 
+    LiveData<List<Element>> bestRated() {
+        return elementsDAO.bestRated();
+    }
+
+    LiveData<List<Element>> search(String t) {
+        return elementsDAO.search(t);
+    }
+
     private Executor executor = Executors.newSingleThreadExecutor();
 
     public void insert(Element element) {
