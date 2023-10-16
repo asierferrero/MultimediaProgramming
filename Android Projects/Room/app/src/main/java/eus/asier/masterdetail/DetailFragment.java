@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
+
 import eus.asier.masterdetail.databinding.FragmentDetailBinding;
 
 public class DetailFragment extends Fragment {
@@ -33,6 +35,15 @@ public class DetailFragment extends Fragment {
                 binding.name.setText(element.name);
                 binding.description.setText(element.description);
                 binding.rating.setRating(element.rating);
+
+                binding.rating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                    @Override
+                    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                        if(fromUser){
+                            elementsViewModel.update(element, rating);
+                        }
+                    }
+                });
             }
         });
     }

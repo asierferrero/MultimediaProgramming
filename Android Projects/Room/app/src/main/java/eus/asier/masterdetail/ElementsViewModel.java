@@ -9,61 +9,60 @@ import androidx.lifecycle.Transformations;
 
 import java.util.List;
 
+import kotlin.jvm.functions.Function1;
+
 public class ElementsViewModel extends AndroidViewModel {
 
-    public ElementsRepository elementsRepository;
-    private MutableLiveData<Element> elementSelected = new MutableLiveData<>();
-    private MutableLiveData<List<Element>> listElementsMutableLiveData = new MutableLiveData<>();
-    private MutableLiveData<String> termSearch = new MutableLiveData<>();
-    private LiveData<List<Element>> resultSearch;
+    ElementsRepository elementsRepository;
+
+    MutableLiveData<List<Element>> listElementsMutableLiveData =
+            new MutableLiveData<>();
+    MutableLiveData<Element> elementSelected = new MutableLiveData<>();
+
+    MutableLiveData<String> termSearch = new MutableLiveData<>();
+
+    LiveData<List<Element>> resultSearch = Transformations.switchMap(termSearch, new Function1<String, LiveData<List<Element>>>() {
+        @Override
+        public LiveData<List<Element>> invoke(String input) {
+            return elementsRepository.search(input);
+        }
+    });
 
     public ElementsViewModel(@NonNull Application application) {
         super(application);
+
         elementsRepository = new ElementsRepository(application);
-        elementsRepository.get().observeForever(elements -> {
-            listElementsMutableLiveData.postValue(elements);
-        });
-
-        resultSearch = Transformations.switchMap(termSearch, input -> elementsRepository.search(input));
     }
 
-    public void select(Element element){
-        elementSelected.setValue(element);
-    }
-
-    public LiveData<Element> selected(){
-        return elementSelected;
-    }
-
-    public LiveData<String> termSearch(){
-        return termSearch;
-    }
-
-    public LiveData<List<Element>> search(){
-        return resultSearch;
-    }
-
-    public LiveData<List<Element>> obtain(){
-        return elementsRepository.get();
-    }
-
-    public LiveData<List<Element>> bestRated(){
-        return elementsRepository.bestRated();
-    }
-
-    public void putTermSearch(String t){
-        termSearch.setValue(t);
-    }
-
-    public void insert(Element element){
+    void insert(Element element){
         elementsRepository.insert(element);
     }
 
-    public void delete(Element element){
+    void delete(Element element){
         elementsRepository.delete(element);
     }
 
-    public void update(Element element, float rating){
+    void update(Element element, float rating){
         elementsRepository.update(element, rating);
+    }
+
+    void select(Element element){
+        elementSelected.setValue(element);
+    }
+
+    MutableLiveData<Element> selected(){
+        return elementSelected;
+    }
+
+    LiveData<List<Element>> obtain(){
+        return elementsRepository.get();
+    }
+
+    LiveData<List<Element>> bestRated(){
+        return elementsRepository.bestRated();
+    }
+
+    LiveData<List<Element>> search(){
+        return resultSearch;
     }
 }

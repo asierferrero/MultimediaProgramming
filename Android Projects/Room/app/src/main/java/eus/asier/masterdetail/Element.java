@@ -1,5 +1,6 @@
 package eus.asier.masterdetail;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -9,24 +10,13 @@ public class Element {
     int id;
     String name;
     String description;
-    int image;
+    @ColumnInfo(name = "rating")
     float rating;
+    int image;
 
     public Element(int image, String name, String description) {
         this.name = name;
         this.description = description;
-        this.image=image;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public float getRating() {
-        return rating;
-    }
-
-    public int getImage() {
-        return image;
+        this.image = image;
     }
 }

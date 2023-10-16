@@ -14,10 +14,11 @@ import androidx.room.Update;
 
 import java.util.List;
 
-@Database(entities = { Element.class }, version = 2, exportSchema = false)
+@Database(entities = { Element.class }, version = 1, exportSchema = false)
 public abstract class ElementsDB extends RoomDatabase {
-    public abstract ElementsDAO getElementsDAO();
+
     private static volatile ElementsDB INSTANCE;
+    public abstract ElementsDAO getElementsDAO();
 
     static ElementsDB obtainInstance(final Context context) {
         if (INSTANCE == null) {
@@ -38,12 +39,6 @@ public abstract class ElementsDB extends RoomDatabase {
         @Query("SELECT * FROM Element")
         LiveData<List<Element>> getElements();
 
-        @Query("SELECT * FROM Element ORDER BY rating DESC")
-        LiveData<List<Element>> bestRated();
-
-        @Query("SELECT * FROM Element WHERE name LIKE '%' || :t || '%'")
-        LiveData<List<Element>> search(String t);
-
         @Insert
         void insert(Element element);
 
@@ -52,5 +47,11 @@ public abstract class ElementsDB extends RoomDatabase {
 
         @Delete
         void delete(Element element);
+
+        @Query("SELECT * FROM Element ORDER BY rating DESC")
+        LiveData<List<Element>> bestRated();
+
+        @Query("SELECT * FROM Element WHERE name LIKE '%' || :t || '%'")
+        LiveData<List<Element>> search(String t);
     }
 }

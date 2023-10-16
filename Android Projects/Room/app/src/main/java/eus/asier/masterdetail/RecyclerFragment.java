@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,7 +14,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -24,7 +25,7 @@ import eus.asier.masterdetail.databinding.ViewholderElementBinding;
 public class RecyclerFragment extends Fragment {
 
     private FragmentRecyclerBinding binding;
-    public ElementsViewModel elementsViewModel;
+    private ElementsViewModel elementsViewModel;
     private NavController navController;
 
     @Override
@@ -42,26 +43,52 @@ public class RecyclerFragment extends Fragment {
         navController = Navigation.findNavController(view);
 
         ElementsAdapter elementsAdapter = new ElementsAdapter();
+
         binding.recyclerView.setAdapter(elementsAdapter);
 
-        binding.recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
-
-        elementsViewModel.obtain().observe(getViewLifecycleOwner(), elements -> {
-            elementsAdapter.establishList(elements);
-
-            getElements().observe(getViewLifecycleOwner(), new Observer<List<Element>>() {
-                @Override
-                public void onChanged(List<Element> elements) {
-                    elementsAdapter.establishList(elements);
-                }
-
-            });
+        elementsViewModel.obtain().observe(getViewLifecycleOwner(), new Observer<List<Element>>() {
+            @Override
+            public void onChanged(List<Element> elements) {
+                elementsAdapter.submitList(elements);
+            }
         });
+
+        binding.floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.action_recyclerFragment_to_newElementFragment);
+            }
+        });
+
+        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                Element element = elementsAdapter.getElement(position);
+                elementsViewModel.delete(element);
+            }
+        };
+
+        new ItemTouchHelper(simpleCallback).attachToRecyclerView(binding.recyclerView);
     }
-    LiveData<List<Element>> getElements() {
+
+    LiveData<List<Element>> getElements(){
         return elementsViewModel.obtain();
     }
 
+    static class ElementViewHolder extends RecyclerView.ViewHolder {
+        private final ViewholderElementBinding binding;
+
+        ElementViewHolder(ViewholderElementBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+    }
 
     class ElementsAdapter extends RecyclerView.Adapter<ElementViewHolder> {
         private List<Element> elements;
@@ -76,21 +103,25 @@ public class RecyclerFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull ElementViewHolder holder, int position) {
             Element element = elements.get(position);
-
             holder.binding.name.setText(element.name);
             holder.binding.ratingBar.setRating(element.rating);
             holder.binding.imageView.setImageResource(element.image);
 
-            holder.itemView.setOnClickListener(v -> {
-                elementsViewModel.select(element);
-                //Delete
-                navController.navigate(R.id.action_recyclerFragment_to_newElementFragment);
-                //Add
-                navController.navigate(R.id.action_newElementFragment);
-                //Delete
-                navController.navigate(R.id.action_recyclerFragment_to_showElementFragment);
-                //Add
-                navController.navigate(R.id.action_showElementFragment);
+            holder.binding.ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                @Override
+                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                    if (fromUser) {
+                        elementsViewModel.update(element, rating);
+                    }
+                }
+            });
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    elementsViewModel.select(element);
+                    navController.navigate(R.id.action_recyclerFragment_to_detailFragment);
+                }
             });
         }
 
@@ -99,18 +130,13 @@ public class RecyclerFragment extends Fragment {
             return elements != null ? elements.size() : 0;
         }
 
-        public void establishList(List<Element> elements) {
+        void submitList(List<Element> elements) {
             this.elements = elements;
             notifyDataSetChanged();
         }
-    }
 
-    static class ElementViewHolder extends RecyclerView.ViewHolder {
-        private final ViewholderElementBinding binding;
-
-        public ElementViewHolder(ViewholderElementBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
+        Element getElement(int position) {
+            return elements.get(position);
         }
     }
 }

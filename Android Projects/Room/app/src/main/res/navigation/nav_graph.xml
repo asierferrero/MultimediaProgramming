@@ -21,7 +21,7 @@
         android:label="fragment_new_element"
         tools:layout="@layout/fragment_new_element" />
     <action
-        android:id="@+id/action_showElementFragment"
+        android:id="@+id/action_detailFragment"
         app:destination="@id/detailFragment" />
     <action
         android:id="@+id/action_newElementFragment"
@@ -30,14 +30,6 @@
         android:id="@+id/action_recyclerFragment_to_newElementFragment"
         app:destination="@id/newElementFragment" />
     <action
-        android:id="@+id/action_recyclerFragment_to_showElementFragment"
+        android:id="@+id/action_recyclerFragment_to_detailFragment"
         app:destination="@id/detailFragment" />
-    <fragment
-        android:id="@+id/recyclerRatingFragment"
-        android:name="eus.asier.masterdetail.RecyclerRatingFragment"
-        android:label="RecyclerRatingFragment" />
-    <fragment
-        android:id="@+id/recyclerSearchFragment"
-        android:name="eus.asier.masterdetail.RecyclerSearchFragment"
-        android:label="RecyclerSearchFragment" />
 </navigation>
