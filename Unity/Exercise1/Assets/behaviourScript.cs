@@ -4,37 +4,49 @@ using UnityEngine;
 
 public class behaviourScript : MonoBehaviour
 {
-    private Vector3 position;
-    int direction = 0;
+    public float speed = 5f;
+    public string direction;
+    public Vector3 movement;
 
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = position;
+        // Define the initial position
+        transform.position = Vector3.zero;
+        direction = "Forward";
+        movement = Vector3.forward;
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch (direction)
-        {
-            case 0:
-                transform.position += new Vector3(0.05f, 0, 0);
-                break;
-            case 1:
-                transform.position -= new Vector3(0, 0, 0.05f);
-                break;
-            case 2:
-                transform.position -= new Vector3(0.05f, 0, 0);
-                break;
-            case 3:
-                transform.position += new Vector3(0, 0, 0.05f);
-                break;
-        }
+        // Move the object
+        transform.position += movement * speed * Time.deltaTime;
 
-        if (Mathf.Abs(transform.position.x - position.x) >= 1 || Mathf.Abs(transform.position.z - position.z) >= 1)
+        // Define the movement and rotation depending on each direction
+        if (direction.Equals("Forward") && transform.position.z >= 10)
         {
-            direction = (direction + 1) % 4;
+            direction = "Right";
+            movement = Vector3.right;
+            transform.Rotate(Vector3.up, 90f);
+        }
+        else if (direction.Equals("Right") && transform.position.x >= 10)
+        {
+            direction = "Back";
+            movement = Vector3.back;
+            transform.Rotate(Vector3.up, 90f);
+        }
+        else if (direction.Equals("Back") && transform.position.z <= 0)
+        {
+            direction = "Left";
+            movement = Vector3.left;
+            transform.Rotate(Vector3.up, 90f);
+        }
+        else if (direction.Equals("Left") && transform.position.x <= 0)
+        {
+            direction = "Forward";
+            movement = Vector3.forward;
+            transform.Rotate(Vector3.up, 90f);
         }
     }
 }
