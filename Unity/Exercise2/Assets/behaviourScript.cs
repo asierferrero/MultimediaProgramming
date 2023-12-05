@@ -4,43 +4,76 @@ using UnityEngine;
 
 public class behaviorScript : MonoBehaviour
 {
-    public float speed = 5f; // Adjust the speed of the movement
-
-    private Vector3 startPoint;
-    private Vector3 endPoint;
-    private Vector3 nextPoint;
-    private int direction = 1; // 1 for forward, -1 for backward
+    public Vector3 point1;
+    public Vector3 point2;
+    private Vector3 currentDirection;
 
     // Start is called before the first frame update
     void Start()
     {
-        startPoint = transform.position;
-        endPoint = new Vector3(startPoint.x + 5f, startPoint.y, startPoint.z); // Adjust the distance of the movement
-        nextPoint = endPoint;
+        // Assign initial values to points and current direction
+        point1 = new Vector3(5f, 0f, 10f);
+        point2 = new Vector3(0f, 0f, 0f);
+        currentDirection = Vector3.right; // Assuming the initial direction is to the right
+        transform.position = Vector3.zero;//reset position to 0,0,0
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, nextPoint, speed * Time.deltaTime);
-
-        if (transform.position == nextPoint)
+        // Check if the current position is to the left of x=10 and at z=0
+        if (transform.position.x <= 10 && transform.position.z == 0)
         {
-            // Change color when direction changes
-            GetComponent<Renderer>().material.color = Random.ColorHSV();
+            // Set the direction to the right
+            Vector3 direction = Vector3.right;
 
-            // Change direction and set the next point
-            direction *= -1;
+            // Move the object to the right
+            transform.position += new Vector3(0.1f, 0, 0);
 
-            if (direction == 1)
+            // Change color when the direction changes
+            if (direction != currentDirection)
             {
-                nextPoint = endPoint;
+                currentDirection = direction;
+                GetComponent<Renderer>().material.color = Random.ColorHSV();
             }
-            else
+        }
+        // Check if the current position is to the right of x=5 and below z=10
+        else if (transform.position.x >= 5 && transform.position.z <= 10)
+        {
+            // Calculate the direction to point1 and normalize it
+            Vector3 direction = (point1 - transform.position).normalized;
+
+            // Move the object in the calculated direction
+            transform.position += direction * 0.1f;
+
+            // Change color when the direction changes
+            if (direction != currentDirection)
             {
-                // Change the axis here if working in pairs
-                nextPoint = new Vector3(startPoint.x, startPoint.y, startPoint.z);
+                currentDirection = direction;
+                GetComponent<Renderer>().material.color = Random.ColorHSV();
             }
+        }
+        // If none of the above conditions are met
+        else
+        {
+            // Calculate the direction to point2 and normalize it
+            Vector3 direction = (point2 - transform.position).normalized;
+
+            // Move the object in the calculated direction
+            transform.position += direction * 0.1f;
+
+            // Change color when the direction changes
+            if (direction != currentDirection)
+            {
+                currentDirection = direction;
+                GetComponent<Renderer>().material.color = Random.ColorHSV();
+            }
+        }
+
+        // Reset the position to (0, 0, 0) if the x position is less than 0
+        if (transform.position.x < 0)
+        {
+            transform.position = new Vector3(0, 0, 0);
         }
     }
 }
