@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class behaviourScript : MonoBehaviour
 {
@@ -60,11 +57,6 @@ public class behaviourScript : MonoBehaviour
         {
             actualGrade++;
             transform.Rotate(0, 1, 0);
-            if (actualGrade == gradeChange)
-            {
-                actualGrade = 0;
-                rotate = false;
-            }
         }
     }
 }
