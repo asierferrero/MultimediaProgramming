@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/star"
+        android:layout_width="53dp"
+        android:layout_height="56dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="15dp"
+        android:clickable="true"
+        android:onClick="onStarClick"
+        android:src="@drawable/ic_star_border"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginEnd="25dp"
+        android:layout_toStartOf="@id/star"
+        android:src="@drawable/sd_eibar" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="164dp"
+        android:layout_height="34dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="50dp"
+        android:layout_toStartOf="@id/imageView"
+        android:text="Tensor Flow"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/resultsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/one"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="3dp"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp"
+            tools:ignore="TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/two"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="3dp"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp"
+            tools:ignore="TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/three"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="3dp"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp"
+            tools:ignore="TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/four"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="3dp"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp"
+            tools:ignore="TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/five"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="3dp"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp"
+            tools:ignore="TextContrastCheck" />
+    </LinearLayout>
+</RelativeLayout>

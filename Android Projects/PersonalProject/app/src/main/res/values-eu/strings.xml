@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Personal Project</string>
+    <string name="password">Pasahitza</string>
+    <string name="username">Erabiltzailea</string>
+    <string name="login">Sartu</string>
+    <string name="prompt_email">Emaila</string>
+    <string name="prompt_password">Pasahitza</string>
+    <string name="action_sign_in">Erregistratu</string>
+    <string name="action_sign_in_short">Erregistratu</string>
+    <string name="welcome">Ongi etorri!</string>
+    <string name="invalid_username">Erabiltzailea ez da zuzena</string>
+    <string name="invalid_password">Pasahitza 5 karaktere edo gehiago izan behar ditu</string>
+    <string name="login_failed">Sartzea ez da ondo egin</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dashboard">Hasiera</string>
+    <string name="home">Hasiera</string>
+    <string name="add">Gehitu</string>
+    <string name="todo">TODO</string>
+    <string name="register">ERREGISTRATU</string>
+    <string name="description">Deskripzioa</string>
+    <string name="name">Izena</string>
+    <string name="favorites">Gustukoenak</string>
+    <string name="log_out">Irten</string>
+    <string name="show_list">Lista erakutsi</string>
+    <string name="visit_webpage">Webgunea ikusi</string>
+    <string name="visit_location">Kokalekua ikusi</string>
+</resources>

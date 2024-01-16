@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".AddTeamFragment">
+
+    <Button
+        android:id="@+id/showListViewButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/show_list"
+        android:layout_marginBottom="16dp" />
+
+    <ListView
+        android:id="@+id/optionsListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/description"
+        android:textColorHint="#A1887F"
+        android:textSize="24sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        tools:ignore="Autofill,TextFields,VisualLintTextFieldSize" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/newElementBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add"
+        android:background="@drawable/buttongreen"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:layout_marginTop="16dp"
+        tools:ignore="VisualLintButtonSize" />
+
+</LinearLayout>

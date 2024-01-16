@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".DetailFragment">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="36sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp"
+        tools:text="Android"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp"
+        tools:text="This is a description"/>
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:src="@drawable/sd_eibar"
+        app:layout_constraintTop_toBottomOf="@id/description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp"
+        tools:ignore="ContentDescription" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/web"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttongreen"
+        android:onClick="urlButton"
+        android:text="@string/visit_webpage"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/imageView4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        tools:ignore="TouchTargetSizeCheck,TextSizeCheck,TextContrastCheck" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/loc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttongreen"
+        android:onClick="mapsButton"
+        android:text="@string/visit_location"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/web"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        tools:ignore="TouchTargetSizeCheck,TextSizeCheck,TextContrastCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
